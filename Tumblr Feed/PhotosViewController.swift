@@ -80,7 +80,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell") as! PhotoCell
 
-        cell.textLabel?.text = "This is row \(indexPath.row)"
+       // cell.textLabel?.text = "This is row \(indexPath.row)"
         let post = posts[indexPath.row]
         let photos = post.value(forKeyPath: "photos") as? [NSDictionary]
         if let photos = post.value(forKeyPath: "photos") as? [NSDictionary] {
@@ -99,5 +99,13 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        let vc = segue.destination as! PhotoDetailsViewController
+        let cell = sender as! PhotoCell
+        vc.image = cell.myImageView.image
+    }
+    
+   
 
 }
